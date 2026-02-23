@@ -9,7 +9,7 @@ const Quotation = () => {
     requirements: "",
   });
 
-  const [status, setStatus] = useState("idle"); // idle | submitting | success | error
+  const [status, setStatus] = useState("idle"); // idle | preparing | success | failed
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,16 +17,34 @@ const Quotation = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus("submitting");
+    if (status === "preparing") return;
 
-    // Simulate sending (replace with real API call later)
-    setTimeout(() => {
-      if (formData.fullName && formData.email && formData.phone && formData.requirements) {
+    setStatus("preparing");
+
+    try {
+      const subject = encodeURIComponent(`Quotation Request from ${formData.fullName || "Visitor"}`);
+      const body = encodeURIComponent(
+        `Full Name: ${formData.fullName || "N/A"}\n` +
+        `Email: ${formData.email || "N/A"}\n` +
+        `Phone: ${formData.phone || "N/A"}\n\n` +
+        `Requirements / Project Details:\n${formData.requirements || "No details provided"}\n\n` +
+        `Sent from Hyder Traders Website`
+      );
+
+      const mailtoLink = `mailto:testcode965@gmail.com?subject=${subject}&body=${body}`;
+      window.location.href = mailtoLink;
+
+      // After opening mail client
+      setTimeout(() => {
         setStatus("success");
-      } else {
-        setStatus("error");
-      }
-    }, 1200);
+        setFormData({ fullName: "", email: "", phone: "", requirements: "" });
+        setTimeout(() => setStatus("idle"), 7000);
+      }, 800);
+    } catch (err) {
+      console.error(err);
+      setStatus("failed");
+      setTimeout(() => setStatus("idle"), 7000);
+    }
   };
 
   return (
@@ -39,99 +57,79 @@ const Quotation = () => {
 
         <form onSubmit={handleSubmit} className="quotation-form">
           <div className="form-group">
-            <label htmlFor="fullName">
-              Full Name <span className="required">*</span>
-            </label>
+            <label htmlFor="fullName">Full Name *</label>
             <input
-              type="text"
               id="fullName"
               name="fullName"
               placeholder="Your full name"
               value={formData.fullName}
               onChange={handleChange}
               required
-              disabled={status === "submitting"}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">
-              Email Address <span className="required">*</span>
-            </label>
+            <label htmlFor="email">Email Address *</label>
             <input
-              type="email"
               id="email"
+              type="email"
               name="email"
-              placeholder="testcode965@gmail.com"
+              placeholder="yourname@example.com"
               value={formData.email}
               onChange={handleChange}
               required
-              disabled={status === "submitting"}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="phone">
-              Phone / WhatsApp Number <span className="required">*</span>
-            </label>
+            <label htmlFor="phone">Phone / WhatsApp Number *</label>
             <input
-              type="tel"
               id="phone"
+              type="tel"
               name="phone"
               placeholder="+92 321 1234567"
               value={formData.phone}
               onChange={handleChange}
               required
-              disabled={status === "submitting"}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="requirements">
-              Your Requirements / Project Details <span className="required">*</span>
-            </label>
+            <label htmlFor="requirements">Your Requirements / Project Details *</label>
             <textarea
               id="requirements"
               name="requirements"
-              placeholder="Example:
-• 10 × 550W solar panels
-• 5kW hybrid inverter
-• 10kWh lithium battery
-Location: Karachi"
+              placeholder="Example:\n• 10 × 550W solar panels\n• 5kW hybrid inverter\n• 10kWh lithium battery\nLocation: Karachi"
               value={formData.requirements}
               onChange={handleChange}
               rows={5}
               required
-              disabled={status === "submitting"}
             />
           </div>
 
           <button
             type="submit"
-            className={`btn-submit ${status === "submitting" ? "loading" : ""}`}
-            disabled={status === "submitting"}
+            className={`btn-submit ${status === "preparing" ? "loading" : ""}`}
+            disabled={status === "preparing"}
           >
-            {status === "submitting" ? (
-              <>
-                <span className="spinner"></span> Sending...
-              </>
-            ) : status === "success" ? (
-              "Request Sent ✓"
-            ) : (
-              "Send Request"
-            )}
+            {status === "preparing"
+              ? "Opening email client..."
+              : status === "success"
+              ? "Compose Window Opened ✓"
+              : "Send Request"}
           </button>
 
           {status === "success" && (
             <div className="success-message">
-              Thank you! Your quotation request has been sent.<br />
-              We'll contact you shortly with the best offer.
+              Your email compose window should open now.<br />
+              Please review and click <strong>Send</strong>.
             </div>
           )}
 
-          {status === "error" && (
+          {status === "failed" && (
             <div className="error-message">
-              Please fill in all required fields.
+              Could not open email client.<br />
+              Please send manually to <strong>testcode965@gmail.com</strong>
             </div>
           )}
         </form>
