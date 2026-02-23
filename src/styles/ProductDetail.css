@@ -139,4 +139,169 @@
 .stars {
   color: #FF8821;
   font-size: 1.2rem;
+
+}
+
+/* ============================= */
+/* LARGE SCREENS (1400px+) */
+/* ============================= */
+
+@media (min-width: 1400px) {
+  .product-detail-container {
+    max-width: 1400px;
+  }
+}
+
+
+/* ============================= */
+/* TABLET (1024px and below) */
+/* ============================= */
+
+@media (max-width: 1024px) {
+
+  .product-main {
+    gap: 30px;
+  }
+
+  .product-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .price {
+    font-size: 1.2rem;
+  }
+
+  .rating-display {
+    font-size: 1.2rem;
+  }
+}
+
+
+/* ============================= */
+/* TABLET SMALL (768px and below) */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  .product-main {
+    grid-template-columns: 1fr; /* stack layout */
+    gap: 30px;
+  }
+
+  .product-image img {
+    max-height: 400px;
+  }
+
+  .price-rating {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .add-cart {
+    width: 100%;
+    text-align: center;
+  }
+
+  .quantity {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+
+/* ============================= */
+/* MOBILE (480px and below) */
+/* ============================= */
+
+@media (max-width: 480px) {
+
+  .product-detail-container {
+    margin: 20px auto;
+    padding: 0 15px;
+  }
+
+  .product-content h1 {
+    font-size: 1.5rem;
+  }
+
+  .meta {
+    font-size: 0.9rem;
+  }
+
+  .meta span {
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .price {
+    font-size: 1.1rem;
+  }
+
+  .rating-display {
+    font-size: 1rem;
+  }
+
+  .quantity button {
+    width: 35px;
+  }
+
+  .quantity span {
+    width: 50px;
+    padding: 8px;
+  }
+
+  .add-cart {
+    padding: 12px;
+    font-size: 1rem;
+  }
+
+  .review-form {
+    padding: 16px;
+  }
+
+  .review-form textarea {
+    min-height: 80px;
+  }
+
+  .submit-review {
+    width: 100%;
+    text-align: center;
+  }
+
+  .review-header {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .stars {
+    font-size: 1rem;
+  }
+}
+
+
+/* ============================= */
+/* VERY SMALL DEVICES (360px) */
+/* ============================= */
+
+@media (max-width: 360px) {
+
+  .product-content h1 {
+    font-size: 1.3rem;
+  }
+
+  .price {
+    font-size: 1rem;
+  }
+
+  .add-cart {
+    font-size: 0.95rem;
+  }
+
 }
