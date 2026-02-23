@@ -1,0 +1,12 @@
+.section { margin: 3rem 2rem; }
+.section h2 {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 1.8rem;
+  color: #082644;
+  margin-bottom: 1.5rem;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
