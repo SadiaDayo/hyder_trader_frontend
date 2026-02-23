@@ -63,6 +63,7 @@
 
 .btn-shop-now:hover {
   background: #082644;
+  color:#FF8821;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(255, 136, 33, 0.3);
 }
@@ -163,6 +164,7 @@
   font-weight: 700;
   color: #082644;
   font-size: 1.2rem;
+  margin-right: 0.5rem;
 }
 
 .btn-remove {
@@ -175,6 +177,7 @@
   font-size: 0.95rem;
   transition: all 0.2s;
   justify-content: right;
+   margin-right: 0.5rem;
 }
 
 .btn-remove:hover {
@@ -272,19 +275,25 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 768px)
+
+{
+    .quantity-control,.item-details{
+        align-items: center;
+        justify-content: center;
+    }
   .cart-card {
     padding: 2rem 1.5rem;
   }
 
   .cart-item {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 1rem;
   }
 
   .item-actions {
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
   }
 

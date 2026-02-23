@@ -62,7 +62,7 @@ const Quotation = () => {
               type="email"
               id="email"
               name="email"
-              placeholder="yourname@example.com"
+              placeholder="testcode965@gmail.com"
               value={formData.email}
               onChange={handleChange}
               required
