@@ -1,6 +1,7 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "../styles/Navbar.css";
 import logo from "../assets/logo.png";
 
@@ -16,7 +17,6 @@ const Navbar = () => {
 
   const closeMenu = () => setMenuOpen(false);
 
-  // Predefined category suggestions
   const categorySuggestions = [
     "Solar Panels",
     "Inverters",
@@ -28,27 +28,27 @@ const Navbar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-
     if (!searchInput.trim()) return;
 
     setSearchQuery(searchInput.trim());
     navigate(`/shop?search=${encodeURIComponent(searchInput.trim())}`);
+
     setSearchInput("");
     setShowSuggestions(false);
     closeMenu();
   };
 
-  // Handle clicking a suggestion
   const handleSuggestionClick = (suggestion) => {
     const query = suggestion === "All Products" ? "" : suggestion;
+
     setSearchQuery(query);
     navigate(`/shop${query ? `?search=${encodeURIComponent(query)}` : ""}`);
+
     setSearchInput("");
     setShowSuggestions(false);
     closeMenu();
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -57,78 +57,61 @@ const Navbar = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const navLinkClass = ({ isActive }) =>
+    isActive ? "nav-link active" : "nav-link";
 
   return (
     <nav className="navbar">
-      {/* LEFT - Logo + Mobile Menu Toggle */}
+
+      {/* LEFT */}
       <div className="nav-left">
         <button
           className="menu-toggle"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          ☰
+          <i className="bi bi-list"></i>
         </button>
 
-        <NavLink to="/" onClick={closeMenu} className="navbar-logo">
+        <NavLink to="/" end onClick={closeMenu} className="navbar-logo">
           <img src={logo} alt="Hyder Traders Logo" />
         </NavLink>
       </div>
 
       {/* CENTER LINKS */}
       <div className={`navbar-links ${menuOpen ? "active" : ""}`}>
-        <NavLink
-          to="/"
-          onClick={closeMenu}
-          className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
-        >
+
+        <NavLink to="/" end onClick={closeMenu} className={navLinkClass}>
           Home
         </NavLink>
 
-        <NavLink
-          to="/shop"
-          onClick={closeMenu}
-          className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
-        >
+        <NavLink to="/shop" onClick={closeMenu} className={navLinkClass}>
           Shop
         </NavLink>
 
-        <NavLink
-          to="/quotation"
-          onClick={closeMenu}
-          className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
-        >
+        <NavLink to="/quotation" onClick={closeMenu} className={navLinkClass}>
           Quotation
         </NavLink>
 
-        <NavLink
-          to="/calculator"
-          onClick={closeMenu}
-          className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
-        >
+        <NavLink to="/calculator" onClick={closeMenu} className={navLinkClass}>
           Calculator
         </NavLink>
 
-        <NavLink
-          to="/about"
-          onClick={closeMenu}
-          className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
-        >
+        <NavLink to="/about" onClick={closeMenu} className={navLinkClass}>
           About
         </NavLink>
 
-        <NavLink
-          to="/contact"
-          onClick={closeMenu}
-          className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
-        >
+        <NavLink to="/contact" onClick={closeMenu} className={navLinkClass}>
           Contact
         </NavLink>
+
       </div>
 
-      {/* SEARCH with Dropdown */}
+      {/* SEARCH */}
       <div className="navbar-search-wrapper" ref={searchRef}>
         <form className="navbar-search" onSubmit={handleSearch}>
           <input
@@ -138,22 +121,24 @@ const Navbar = () => {
             onChange={(e) => setSearchInput(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
           />
-          <button type="submit" aria-label="Search">
-            🔍
+          <button type="submit">
+            <i className="bi bi-search"></i>
           </button>
         </form>
 
-        {/* Dropdown suggestions - shows on focus */}
         {showSuggestions && (
           <div className="search-suggestions">
-            <p className="suggestions-title">Popular Categories</p>
+            <p className="suggestions-title">
+              <i className="bi bi-stars"></i> Popular Categories
+            </p>
+
             {categorySuggestions.map((cat) => (
               <button
                 key={cat}
                 className="suggestion-item"
                 onClick={() => handleSuggestionClick(cat)}
               >
-                {cat}
+                <i className="bi bi-arrow-right-circle"></i> {cat}
               </button>
             ))}
           </div>
@@ -162,14 +147,19 @@ const Navbar = () => {
 
       {/* RIGHT ICONS */}
       <div className="navbar-icons">
+
         <NavLink to="/wishlist" onClick={closeMenu} className="icon">
-          💖 <span>{wishlist.length}</span>
+          <i className="bi bi-heart"></i>
+          <span>{wishlist.length}</span>
         </NavLink>
 
         <NavLink to="/cart" onClick={closeMenu} className="icon">
-          🛒 <span>{cart.length}</span>
+          <i className="bi bi-cart3"></i>
+          <span>{cart.length}</span>
         </NavLink>
+
       </div>
+
     </nav>
   );
 };

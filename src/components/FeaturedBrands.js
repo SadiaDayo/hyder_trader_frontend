@@ -7,7 +7,7 @@ import "../styles/FeaturedBrands.css";
 import ItelLogo from "../assets/brands/itel.png";
 import SofarLogo from "../assets/brands/sofar.png";
 import GrowattLogo from "../assets/brands/growatt.png";
-import InverexLogo from "../assets/brands/inverex.png";
+import InverexLogo from "../assets/brands/invere.png";
 import LongiLogo from "../assets/brands/longi.png";
 import JinkoLogo from "../assets/brands/jinko.png";
 import TrinaLogo from "../assets/brands/trina.png";
