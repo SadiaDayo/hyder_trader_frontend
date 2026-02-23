@@ -38,7 +38,7 @@ const Contact = () => {
         `Sent from Hyder Traders website`
       );
 
-      const mailtoLink = `mailto:info@hydertraders.com?subject=${subject}&body=${body}`;
+      const mailtoLink = `mailto:testcode965@gmail.com?subject=${subject}&body=${body}`;
       window.location.href = mailtoLink;
 
       setTimeout(() => {
@@ -182,5 +182,6 @@ const Contact = () => {
     </div>
   );
 };
+
 
 export default Contact;
