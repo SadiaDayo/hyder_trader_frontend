@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
+import { useToast } from "../context/ToastContext"; // ← ADD THIS IMPORT
 import "../styles/ProductCard.css";
 
 const ProductCard = ({ product }) => {
   const { cart, wishlist, addToCart, removeFromCart, addToWishlist, removeFromWishlist } =
     useContext(AppContext);
+  const { addToast } = useToast(); // ← use the toast hook here
 
   const [hovered, setHovered] = useState(false);
 
@@ -15,15 +17,27 @@ const ProductCard = ({ product }) => {
   const toggleCart = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (inCart) removeFromCart(product.id);
-    else addToCart(product);
+
+    if (inCart) {
+      removeFromCart(product.id);
+      addToast(`Removed ${product.name} from cart`, "info", 3000);
+    } else {
+      addToCart(product);
+      addToast(`Added ${product.name} to cart`, "success", 3000);
+    }
   };
 
   const toggleWishlist = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (inWishlist) removeFromWishlist(product.id);
-    else addToWishlist(product);
+
+    if (inWishlist) {
+      removeFromWishlist(product.id);
+      addToast(`Removed ${product.name} from wishlist`, "info", 2500);
+    } else {
+      addToWishlist(product);
+      addToast(`Added ${product.name} to wishlist`, "success", 2500);
+    }
   };
 
   return (

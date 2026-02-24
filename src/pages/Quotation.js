@@ -38,7 +38,7 @@ const Quotation = () => {
       setTimeout(() => {
         setStatus("success");
         setFormData({ fullName: "", email: "", phone: "", requirements: "" });
-        setTimeout(() => setStatus("idle"), 7000);
+        setTimeout(() => setStatus("idle"), 10000);
       }, 800);
     } catch (err) {
       console.error(err);

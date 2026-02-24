@@ -2,11 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import { AppContext } from "../context/AppContext";
-import { products } from "../pages/Products"; // ← from same folder
+import { useToast } from "../context/ToastContext"; // ← new import
+import { products } from "../pages/Products"; // your products data file
 import "../styles/Shop.css";
 
 const Shop = () => {
   const { searchQuery, setSearchQuery, reviews = {} } = useContext(AppContext);
+  const { addToast } = useToast(); // ← hook to show toasts
   const location = useLocation();
 
   const [filtered, setFiltered] = useState(products);
@@ -73,7 +75,13 @@ const Shop = () => {
     }
 
     setFiltered(list);
-  }, [location.search, selectedCategory, searchQuery, setSearchQuery, reviews]);
+
+    // Optional: Show toast when filters change (e.g., new search or category)
+    if (searchQuery || urlCompany || selectedCategory !== "All") {
+      addToast(`Showing ${list.length} products`, "info", 2500);
+    }
+
+  }, [location.search, selectedCategory, searchQuery, setSearchQuery, reviews, addToast]);
 
   const clearFilters = () => {
     setSelectedCompany("All");
@@ -81,6 +89,7 @@ const Shop = () => {
     setSearchQuery("");
     window.history.replaceState({}, document.title, "/shop");
     setFiltered(products);
+    addToast("Filters cleared – showing all products", "success", 3000);
   };
 
   return (
@@ -92,7 +101,9 @@ const Shop = () => {
           <button
             key={c}
             className={selectedCompany === c ? "active" : ""}
-            onClick={() => (window.location.href = `/shop?company=${encodeURIComponent(c)}`)}
+            onClick={() =>
+              (window.location.href = `/shop?company=${encodeURIComponent(c)}`)
+            }
           >
             {c}
           </button>
