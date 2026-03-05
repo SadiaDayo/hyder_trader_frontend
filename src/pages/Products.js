@@ -13,6 +13,8 @@ export const products = [
     price: 28500,
     image: solarPanelImg,
     description: "High-efficiency mono PERC panel, good low-light performance and 25-year warranty.",
+    inStock: true,
+    stockQty: 18,
   },
   {
     id: 2,
@@ -22,6 +24,8 @@ export const products = [
     price: 125000,
     image: inverterImg,
     description: "6kW hybrid with MPPT, WiFi monitoring, battery compatible.",
+    inStock: true,
+    stockQty: 6,
   },
   {
     id: 3,
@@ -31,6 +35,8 @@ export const products = [
     price: 98000,
     image: inverterImg,
     description: "Smart hybrid inverter with energy storage support.",
+    inStock: true,
+    stockQty: 9,
   },
   {
     id: 4,
@@ -40,6 +46,8 @@ export const products = [
     price: 145000,
     image: inverterImg,
     description: "High-efficiency on-grid for net metering.",
+    inStock: false,
+    stockQty: 0,
   },
   {
     id: 5,
@@ -49,6 +57,8 @@ export const products = [
     price: 115000,
     image: inverterImg,
     description: "Off-grid/hybrid 5kW, popular for home backup.",
+    inStock: true,
+    stockQty: 4,
   },
   {
     id: 6,
@@ -58,6 +68,8 @@ export const products = [
     price: 220000,
     image: batteryImg,
     description: "LiFePO4 battery, 6000+ cycles, wall-mount.",
+    inStock: true,
+    stockQty: 3,
   },
   {
     id: 7,
@@ -67,6 +79,8 @@ export const products = [
     price: 32000,
     image: solarPanelImg,
     description: "Mono PERC panel with excellent heat tolerance.",
+    inStock: true,
+    stockQty: 20,
   },
   {
     id: 8,
@@ -76,6 +90,8 @@ export const products = [
     price: 95000,
     image: inverterImg,
     description: "Local favorite hybrid with strong build quality.",
+    inStock: false,
+    stockQty: 0,
   },
   {
     id: 9,
@@ -85,6 +101,8 @@ export const products = [
     price: 135000,
     image: inverterImg,
     description: "Reliable MPPT hybrid for residential use.",
+    inStock: true,
+    stockQty: 5,
   },
   {
     id: 10,
@@ -94,6 +112,8 @@ export const products = [
     price: 34000,
     image: solarPanelImg,
     description: "Bifacial design for extra energy yield.",
+    inStock: true,
+    stockQty: 12,
   },
   {
     id: 11,
@@ -103,6 +123,8 @@ export const products = [
     price: 29500,
     image: solarPanelImg,
     description: "Top-tier efficiency, #1 selling panel in Pakistan.",
+    inStock: true,
+    stockQty: 25,
   },
   {
     id: 12,
@@ -112,6 +134,8 @@ export const products = [
     price: 38000,
     image: solarPanelImg,
     description: "Advanced bifacial for commercial installs.",
+    inStock: false,
+    stockQty: 0,
   },
   {
     id: 13,
@@ -121,6 +145,8 @@ export const products = [
     price: 31000,
     image: solarPanelImg,
     description: "High-efficiency N-type with low degradation.",
+    inStock: true,
+    stockQty: 16,
   },
   {
     id: 14,
@@ -130,6 +156,8 @@ export const products = [
     price: 33500,
     image: solarPanelImg,
     description: "Reliable performance in hot climates.",
+    inStock: true,
+    stockQty: 10,
   },
   {
     id: 15,
@@ -139,6 +167,8 @@ export const products = [
     price: 30500,
     image: solarPanelImg,
     description: "Excellent PID resistance and durability.",
+    inStock: true,
+    stockQty: 14,
   },
   {
     id: 16,
@@ -148,6 +178,8 @@ export const products = [
     price: 160000,
     image: inverterImg,
     description: "Smart string inverter with fusion solar app.",
+    inStock: true,
+    stockQty: 2,
   },
   {
     id: 17,
@@ -157,6 +189,8 @@ export const products = [
     price: 12000,
     image: ledImg,
     description: "Energy-efficient LED with solar panel.",
+    inStock: true,
+    stockQty: 30,
   },
   {
     id: 18,
@@ -166,5 +200,7 @@ export const products = [
     price: 45000,
     image: batteryImg,
     description: "Affordable backup battery option.",
+    inStock: true,
+    stockQty: 7,
   },
 ];

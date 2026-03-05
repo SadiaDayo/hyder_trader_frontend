@@ -209,3 +209,45 @@
   from { opacity: 1; }
   to { opacity: 0; }
 }
+
+/* ===== Stock badge like reference (top-left) ===== */
+.product-image {
+  position: relative;
+}
+
+.stock-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+
+  padding: 6px 12px;
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: #fff;
+
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.stock-badge.in {
+  background: #22a652;
+}
+
+.stock-badge.out {
+  background: #e53935;
+}
+
+/* optional: slightly faded card when out of stock */
+.out-stock-card {
+  opacity: 0.95;
+}
+
+/* disabled add button */
+.add-cart-btn.disabled {
+  background: #999 !important;
+  cursor: not-allowed !important;
+  opacity: 0.9;
+}

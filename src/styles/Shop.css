@@ -1,3 +1,133 @@
+/* ===== Improved Shop Toolbar UI ===== */
+.shop-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+
+  margin: 18px 0 18px;
+  padding: 12px 14px;
+
+  background: #ffffff;
+  border: 1px solid #e9edf3;
+  border-radius: 14px;
+  color: #082644;
+
+  box-shadow: 0 10px 22px rgba(8, 38, 68, 0.08);
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.results-text {
+  margin: 0;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #082644;
+  opacity: 0.95;
+}
+
+.results-text i {
+  color: #FF8821;
+  font-size: 16px;
+}
+
+.clear-btn {
+  border: 1px solid rgba(255, 136, 33, 0.35);
+  background: rgba(255, 136, 33, 0.08);
+  color: #FF8821;
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: 0.2s ease;
+}
+
+.clear-btn:hover {
+  background: rgba(255, 136, 33, 0.14);
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Stock toggle compact */
+.stock-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid #e9edf3;
+  background: #f9fafb;
+  cursor: pointer;
+  white-space: nowrap; /* ✅ prevent multi-line */
+}
+
+.stock-toggle input {
+  transform: scale(1.1);
+  cursor: pointer;
+  accent-color: #FF8821; /* modern checkbox color */
+}
+
+.stock-toggle span {
+  color: #082644;
+}
+
+/* Sort container with icon */
+.sort-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid #e9edf3;
+  background: #f9fafb;
+}
+
+.sort-wrap i {
+  color: #FF8821;
+  font-size: 16px;
+}
+
+.sort-select {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 13px;
+  font-weight: 700;
+  color: #082644;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .shop-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .toolbar-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
 /* ==========================================
    Shop Page - Main Layout
    ========================================== */
