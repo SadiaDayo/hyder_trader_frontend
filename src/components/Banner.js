@@ -26,7 +26,7 @@ const slides = [
 const Banner = () => {
   const [index, setIndex] = useState(0);
 
-  // Auto slide
+  // Auto slide for main banner
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % slides.length);
@@ -36,20 +36,26 @@ const Banner = () => {
   }, []);
 
   return (
-    <section className="slider">
-      {slides.map((slide, i) => (
-        <div
-          key={i}
-          className={`slide ${i === index ? "active" : ""}`}
-          style={{ backgroundImage: `url(${slide.image})` }}
-        >
-          <div className="overlay">
-            <h1>{slide.title}</h1>
-            <p>{slide.subtitle}</p>
-            <a href="/shop" className="slider-btn">Shop Now</a>
+    <section className="banner-section">
+    
+      {/* Main Slider Banner */}
+      <div className="slider">
+        {slides.map((slide, i) => (
+          <div
+            key={i}
+            className={`slide ${i === index ? "active" : ""}`}
+            style={{ backgroundImage: `url(${slide.image})` }}
+          >
+            <div className="overlay">
+              <h1>{slide.title}</h1>
+              <p>{slide.subtitle}</p>
+              <a href="/shop" className="slider-btn">
+                Shop Now
+              </a>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </section>
   );
 };
