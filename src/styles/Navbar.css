@@ -16,7 +16,7 @@
    RUNNING MARQUEE STRIP - Fixed at very top
    ========================================== */
 .marquee-strip {
-  background: #082644;
+  background: #FF8821;
   color: #fff;
   overflow: hidden;
   white-space: nowrap;
@@ -58,7 +58,7 @@
 /* Pause on hover */
 .marquee-strip:hover .marquee-content {
   animation-play-state: paused;
-  background-color: #FF8821;
+  background-color: #082644;
 }
 @keyframes marquee {
   from {
@@ -360,3 +360,4 @@ color: white;
     width: 80%;
   }
 }
+
