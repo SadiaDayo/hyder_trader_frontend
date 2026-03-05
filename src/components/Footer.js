@@ -43,6 +43,7 @@ const Footer = () => {
             <li><Link to="/about">About Us</Link></li>
             <li><Link to="/contact">Contact Us</Link></li>
           </ul>
+          
         </div>
 
         {/* Column 3: Social Media */}
@@ -82,6 +83,13 @@ const Footer = () => {
               <FaYoutube />
             </a>
           </div>
+          <h4 style={{ marginTop: "22px" }}>Policies</h4>
+<ul className="footer-links">
+  <li><Link to="/return-policy">Return Policy</Link></li>
+  <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+  <li><Link to="/terms">Terms & Conditions</Link></li>
+  <li><Link to="/warranty">Warranty Policy</Link></li>
+</ul>
         </div>
       </div>
 

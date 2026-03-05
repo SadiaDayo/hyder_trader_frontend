@@ -15,10 +15,15 @@ import Quotation from "./pages/Quotation";
 import Calculator from "./pages/Calculator";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import ReturnPolicy from "./pages/ReturnPolicy";
+import Terms from "./pages/Terms";
+import Warranty from "./pages/Warranty";
+import ScrollToTop from "./components/ScrollTop";
 function App() {
   return (
     <Router>
+      <ScrollToTop/> {/* Scroll to top on route change */}
       <div className="app">
         <Navbar />
 
@@ -33,6 +38,10 @@ function App() {
           <Route path="/calculator" element={<Calculator />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+<Route path="/return-policy" element={<ReturnPolicy />} />
+<Route path="/terms" element={<Terms />} />
+<Route path="/warranty" element={<Warranty />} />
         </Routes>
 
         <Footer />
