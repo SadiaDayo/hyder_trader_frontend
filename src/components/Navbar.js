@@ -68,20 +68,80 @@ const Navbar = () => {
     <>
       {/* Running Marquee Strip - Fixed at very top */}
       <div className="marquee-strip">
-        <div className="marquee-content">
-          <span>
-            ⚡ Free Delivery on Orders Above PKR 50,000 </span><span> Fast 2-5 Days Shipping </span><span>
-            Expert Solar Consultation via WhatsApp </span><span>Quality Products with Warranty </span><span>
-            24/7 Customer Support </span><span> Shop Now & Save Big! ⚡
-          </span>
-          {/* Duplicate for seamless infinite loop */}
-          <span>
-            ⚡ Free Delivery on Orders Above PKR 50,000 </span><span> Fast 2-5 Days Shipping </span><span>
-            Expert Solar Consultation via WhatsApp </span><span>Quality Products with Warranty </span><span>
-            24/7 Customer Support </span><span> Shop Now & Save Big! ⚡
-          </span>
-        </div>
-      </div>
+  <div className="marquee-content">
+
+    <span>
+      <i className="bi bi-truck"></i> Free Delivery on Orders Above PKR 50,000
+    </span>
+
+    <span className="marquee-sep">•</span>
+
+    <span>
+      <i className="bi bi-clock"></i> Fast 2–5 Days Shipping
+    </span>
+
+    <span className="marquee-sep">•</span>
+
+    <span>
+      <i className="bi bi-whatsapp"></i> Expert Solar Consultation via WhatsApp
+    </span>
+
+    <span className="marquee-sep">•</span>
+
+    <span>
+      <i className="bi bi-shield-check"></i> Quality Products with Warranty
+    </span>
+
+    <span className="marquee-sep">•</span>
+
+    <span>
+      <i className="bi bi-headset"></i> 24/7 Customer Support
+    </span>
+
+    <span className="marquee-sep">•</span>
+
+    <span>
+      ⚡ Shop Now & Save Big!
+    </span>
+
+    {/* Duplicate for seamless infinite loop */}
+
+    <span>
+      <i className="bi bi-truck"></i> Free Delivery on Orders Above PKR 50,000
+    </span>
+
+    <span className="marquee-sep">•</span>
+
+    <span>
+      <i className="bi bi-clock"></i> Fast 2–5 Days Shipping
+    </span>
+
+    <span className="marquee-sep">•</span>
+
+    <span>
+      <i className="bi bi-whatsapp"></i> Expert Solar Consultation via WhatsApp
+    </span>
+
+    <span className="marquee-sep">•</span>
+
+    <span>
+      <i className="bi bi-shield-check"></i> Quality Products with Warranty
+    </span>
+
+    <span className="marquee-sep">•</span>
+
+    <span>
+      <i className="bi bi-headset"></i> 24/7 Customer Support
+    </span>
+
+    <span className="marquee-sep">•</span>
+
+    <span>
+      ⚡ Shop Now & Save Big!
+    </span>
+
+  </div>
+</div>
 
       {/* Main Navbar */}
       <nav className="navbar">

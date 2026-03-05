@@ -11,15 +11,17 @@
   --text-muted: #e0f2fe;
 }
 
+
 /* ==========================================
    RUNNING MARQUEE STRIP - Fixed at very top
    ========================================== */
 .marquee-strip {
-  background: #FF8821;
-  color: #082644;
+  background: #082644;
+  color: #fff;
   overflow: hidden;
   white-space: nowrap;
   font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
   height: var(--marquee-height);
   line-height: var(--marquee-height);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
@@ -28,32 +30,43 @@
   left: 0;
   right: 0;
   z-index: 1100;                    /* above navbar */
-  text-align: center;
+ 
 }
 
 .marquee-content {
-  display: inline-block;
-  animation: marquee 50s linear infinite;   /* 30s = speed, lower = faster */
-  padding-left: 100%;
-   font-size: 1rem;
-  font-weight: 700;
-  font-family:'Work Sans', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  animation: marquee 28s linear infinite;
+  min-width: max-content;   
 }
 
 .marquee-content span {
-  display: inline-block;
-  padding: 0 2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
+.marquee-content i {
+  font-size: 14px;
+  
+}
+
+.marquee-sep {
+  opacity: 0.4;
+}
 /* Pause on hover */
 .marquee-strip:hover .marquee-content {
   animation-play-state: paused;
+  background-color: #FF8821;
 }
-
-/* Marquee animation - right to left */
 @keyframes marquee {
-  0%   { transform: translateX(30); }
-  100% { transform: translateX(-100%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* ==========================================
