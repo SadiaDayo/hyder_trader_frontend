@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "../styles/WhatsAppFloat.css";
 
 const WhatsAppFloat = () => {
-  const phone = "923352043678"; // ✅ put client number (no +)
+  const phone = "923001239856"; // ✅ put client number (no +)
   const message = encodeURIComponent(
     "Assalamualaikum! I need help regarding products/prices. Please guide me."
   );
