@@ -17,14 +17,14 @@ const Navbar = () => {
 
   const closeMenu = () => setMenuOpen(false);
 
-  const categorySuggestions = [
-    "Solar Panels",
-    "Inverters",
-    "Batteries",
-    "Electronics",
-    "LED Lights",
-    "All Products",
-  ];
+   const categorySuggestions = [
+  "Solar Panels",
+  "Inverters",
+  "Batteries",
+  "Electronics",
+  "All Products",
+];
+
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -38,16 +38,20 @@ const Navbar = () => {
     closeMenu();
   };
 
-  const handleSuggestionClick = (suggestion) => {
-    const query = suggestion === "All Products" ? "" : suggestion;
 
-    setSearchQuery(query);
-    navigate(`/shop${query ? `?search=${encodeURIComponent(query)}` : ""}`);
+const handleSuggestionClick = (suggestion) => {
+  if (suggestion === "All Products") {
+    setSearchQuery("");
+    navigate("/shop");
+  } else {
+    setSearchQuery("");
+    navigate(`/shop?category=${encodeURIComponent(suggestion)}`);
+  }
 
-    setSearchInput("");
-    setShowSuggestions(false);
-    closeMenu();
-  };
+  setSearchInput("");
+  setShowSuggestions(false);
+  closeMenu();
+};
 
   useEffect(() => {
     const handleClickOutside = (event) => {

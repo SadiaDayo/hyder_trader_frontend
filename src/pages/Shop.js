@@ -30,8 +30,6 @@ const Shop = () => {
 
   const [selectedCompany, setSelectedCompany] = useState("All");
   const [selectedCategory, setSelectedCategory] = useState("All");
-
-  // ✅ NEW: toolbar state (sorting + availability)
   const [sortBy, setSortBy] = useState("default");
   const [inStockOnly, setInStockOnly] = useState(false);
 
@@ -62,28 +60,42 @@ const Shop = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const urlCompany = params.get("company");
+    const urlCategory = params.get("category");
     const urlSearch = params.get("search") || "";
 
-    // URL -> state sync
-    if (urlCompany) setSelectedCompany(urlCompany);
-    if (urlSearch) setSearchQuery(urlSearch);
+    if (urlCompany) {
+      setSelectedCompany(urlCompany);
+    } else {
+      setSelectedCompany("All");
+    }
+
+    if (urlCategory) {
+      setSelectedCategory(urlCategory);
+    } else {
+      setSelectedCategory("All");
+    }
+
+    if (urlSearch) {
+      setSearchQuery(urlSearch);
+    } else {
+      setSearchQuery("");
+    }
 
     let list = products;
 
-    // ✅ Company filter (prefer URL if present, else local state)
-    const companyToUse = urlCompany || selectedCompany;
-    if (companyToUse && companyToUse !== "All") {
+    const companyToUse = urlCompany || "All";
+    const categoryToUse = urlCategory || "All";
+
+    if (companyToUse !== "All") {
       list = list.filter((p) => p.company === companyToUse);
     }
 
-    // ✅ Category filter
-    if (selectedCategory !== "All") {
-      list = list.filter((p) => p.category === selectedCategory);
+    if (categoryToUse !== "All") {
+      list = list.filter((p) => p.category === categoryToUse);
     }
 
-    // ✅ Search filter
-    if (searchQuery) {
-      const q = searchQuery.toLowerCase();
+    if (urlSearch) {
+      const q = urlSearch.toLowerCase();
       list = list.filter(
         (p) =>
           p.name.toLowerCase().includes(q) ||
@@ -92,12 +104,10 @@ const Shop = () => {
       );
     }
 
-    // ✅ Availability filter (requires products to have inStock: true/false)
     if (inStockOnly) {
-      list = list.filter((p) => p.inStock === true);
+      list = list.filter((p) => p.inStock === true && (p.stockQty ?? 0) > 0);
     }
 
-    // ✅ Sorting
     if (sortBy === "newest") {
       list = [...list].sort((a, b) => (b.id || 0) - (a.id || 0));
     } else if (sortBy === "priceLow") {
@@ -109,17 +119,31 @@ const Shop = () => {
     }
 
     setFiltered(list);
-  }, [
-    location.search,
-    selectedCompany,
-    selectedCategory,
-    searchQuery,
-    setSearchQuery,
-    reviews,
-    addToast,
-    sortBy,
-    inStockOnly,
-  ]);
+  }, [location.search, sortBy, inStockOnly, setSearchQuery]);
+
+  const updateQueryParams = (newCompany, newCategory) => {
+    const params = new URLSearchParams(location.search);
+
+    if (newCompany && newCompany !== "All") {
+      params.set("company", newCompany);
+    } else {
+      params.delete("company");
+    }
+
+    if (newCategory && newCategory !== "All") {
+      params.set("category", newCategory);
+    } else {
+      params.delete("category");
+    }
+
+    if (!params.get("search")) {
+      params.delete("search");
+    }
+
+    const newUrl = params.toString() ? `/shop?${params.toString()}` : "/shop";
+    window.history.replaceState({}, document.title, newUrl);
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  };
 
   const clearFilters = () => {
     setSelectedCompany("All");
@@ -129,8 +153,9 @@ const Shop = () => {
     setInStockOnly(false);
 
     window.history.replaceState({}, document.title, "/shop");
-    setFiltered(products);
+    window.dispatchEvent(new PopStateEvent("popstate"));
 
+    setFiltered(products);
     addToast("Filters cleared – showing all products", "success", 2000);
   };
 
@@ -145,49 +170,47 @@ const Shop = () => {
     <div className="shop-page">
       <h1>Distributor Products</h1>
 
-      {/* ✅ TOOLBAR */}
       <div className="shop-toolbar">
-  <div className="toolbar-left">
-    <p className="results-text">
-      <i className="bi bi-grid-3x3-gap"></i>
-      Showing <b>{filtered.length}</b> of <b>{products.length}</b> products
-    </p>
+        <div className="toolbar-left">
+          <p className="results-text">
+            <i className="bi bi-grid-3x3-gap"></i>
+            Showing <b>{filtered.length}</b> of <b>{products.length}</b> products
+          </p>
 
-    {hasActiveFilters && (
-      <button className="clear-btn" onClick={clearFilters}>
-        <i className="bi bi-x-circle"></i> Clear
-      </button>
-    )}
-  </div>
+          {hasActiveFilters && (
+            <button className="clear-btn" onClick={clearFilters}>
+              <i className="bi bi-x-circle"></i> Clear
+            </button>
+          )}
+        </div>
 
-  <div className="toolbar-right">
-    <label className="stock-toggle">
-      <input
-        type="checkbox"
-        checked={inStockOnly}
-        onChange={(e) => setInStockOnly(e.target.checked)}
-      />
-      <span>In Stock</span>
-    </label>
+        <div className="toolbar-right">
+          <label className="stock-toggle">
+            <input
+              type="checkbox"
+              checked={inStockOnly}
+              onChange={(e) => setInStockOnly(e.target.checked)}
+            />
+            <span>In Stock</span>
+          </label>
 
-    <div className="sort-wrap">
-      <i className="bi bi-filter"></i>
-      <select
-        className="sort-select"
-        value={sortBy}
-        onChange={(e) => setSortBy(e.target.value)}
-      >
-        <option value="default">Sort: Default</option>
-        <option value="newest">Newest</option>
-        <option value="priceLow">Price: Low → High</option>
-        <option value="priceHigh">Price: High → Low</option>
-        <option value="nameAZ">Name: A → Z</option>
-      </select>
-    </div>
-  </div>
-</div>
+          <div className="sort-wrap">
+            <i className="bi bi-filter"></i>
+            <select
+              className="sort-select"
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+            >
+              <option value="default">Sort: Default</option>
+              <option value="newest">Newest</option>
+              <option value="priceLow">Price: Low → High</option>
+              <option value="priceHigh">Price: High → Low</option>
+              <option value="nameAZ">Name: A → Z</option>
+            </select>
+          </div>
+        </div>
+      </div>
 
-      {/* Company filter */}
       <div className="filter-row">
         {companies.map((c) => (
           <button
@@ -195,12 +218,7 @@ const Shop = () => {
             className={selectedCompany === c ? "active" : ""}
             onClick={() => {
               setSelectedCompany(c);
-              // ✅ update URL without full refresh
-              window.history.replaceState(
-                {},
-                document.title,
-                `/shop?company=${encodeURIComponent(c)}`
-              );
+              updateQueryParams(c, selectedCategory);
             }}
           >
             {c}
@@ -208,13 +226,15 @@ const Shop = () => {
         ))}
       </div>
 
-      {/* Category filter */}
       <div className="filter-row">
         {categories.map((cat) => (
           <button
             key={cat}
             className={selectedCategory === cat ? "active" : ""}
-            onClick={() => setSelectedCategory(cat)}
+            onClick={() => {
+              setSelectedCategory(cat);
+              updateQueryParams(selectedCompany, cat);
+            }}
           >
             {cat}
           </button>
@@ -231,8 +251,6 @@ const Shop = () => {
           filtered.map((p) => (
             <div key={p.id} className="product-wrapper">
               <ProductCard product={p} />
-
-
               <div className="rating-below-card">
                 {renderStars(getAverageRating(p.id))}
               </div>

@@ -123,3 +123,16 @@
     padding: 40px 15px;
   }
 }
+
+
+/* Category section spacing */
+.categories-section {
+  padding-top: 10px;
+}
+
+/* Optional: category images can be slightly larger */
+.category-image-fit {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+}
